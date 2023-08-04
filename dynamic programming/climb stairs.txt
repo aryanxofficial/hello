@@ -1,0 +1,80 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    //int this program we only have to print the number of possible ways so no need to take answer so far
+    static int ctr=0;
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        Scanner scn=new Scanner (System.in);
+        int n=scn.nextInt();
+        int[]arr=new int [n+1];
+        int ways=cs_mem(n,arr);
+        System.out.println(ways);
+    }
+    // public static void climb_stairs(int n){     //normal recursion
+    //     if(n==0){
+    //         ctr++;
+    //         return;
+    //     }
+    //     if(n<0){
+    //         return;
+    //     }
+    //     //1 step
+    //     climb_stairs(n-1);
+        
+    //     //2 steps
+    //     climb_stairs(n-2);
+        
+    //     //3 steps
+    //     climb_stairs(n-3);
+        
+    // }
+    public static int cs_tab(int n){          //tabulation method
+        int[] dp=new int [n+1];
+        //dp[i]--> i to 0 ways
+        
+        dp[0]=1;
+        
+        for(int i=1;i<=n;i++){ 
+            
+            if(i==1){
+            dp[i]=dp[i-1];
+            }
+            else if(i==2){
+             dp[i]=dp[i-1]+dp[i-2];
+            }
+            else{
+             dp[i]=dp[i-1]+dp[i-2]+dp[i-3];
+            }
+        }
+        return dp[n];
+    }
+    
+    public static int cs_mem(int n ,int[] qb){  //memoisation method
+        if(n==0){
+            return 1;
+        }
+        if(n<0){
+            return 0;
+        }
+        
+        if(qb[n]!=0){
+            return qb[n];
+        }
+        int ways=cs_mem(n-1,qb)+cs_mem(n-2,qb)+cs_mem(n-3,qb);
+        qb[n]=ways;
+        
+        return ways;
+    }
+
+}
+
+
+
+
+
+
+
+

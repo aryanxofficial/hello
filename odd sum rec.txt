@@ -1,0 +1,28 @@
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int res=sumofodd(n);
+        System.out.println(res);
+        
+     }
+     //E sumofodd(n)=>2275 :ans=12
+     //F sumofodd(n/10)=>227 :ans=7
+     //EWF sumofodd(n)=>sumofodd(n/10)if(rem=odd)=sumofodd+rem
+     public static int sumofodd(int n){
+         if(n==0){
+             return 0;
+         }
+         
+         int ans=sumofodd(n/10);
+         int num=n%10;
+         if(num%2!=0){
+             ans=ans+num;
+             return ans;
+         }else{
+             return ans;
+         }
+     }
+}
